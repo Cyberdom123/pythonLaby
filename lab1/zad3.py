@@ -3,7 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def check_if_sorted(arr):
-    sorted = True
     for i in range(len(arr)-1):
         if arr[i + 1] < arr[i]:
             return False
@@ -20,17 +19,24 @@ def bubble_sort(arr):
                 arr[i+1] = tmp
 
 def select_sort(arr):
-    tmp = min(arr)
-    for i in range(len(arr)-1):
-        if(arr[i] != tmp):
-            arr[i] = tmp
-        tmp = min(arr[i:])
+    lowest = 0
+    size = len(arr)
+    for i in range(size - 1) :
+        lowest = i
+        for j in range(i + 1, size):
+            if arr[lowest] > arr[j]:
+                lowest = j
+        temp = arr[i]
+        arr[i] = arr[lowest]
+        arr[lowest] = temp
+
 
 
 
 N = 1000
 
 arr = np.random.rand(N)
+
 plt.stem(arr)
 plt.show()
 #bubble_sort(arr)
