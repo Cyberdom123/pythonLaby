@@ -20,7 +20,6 @@ class TestMultiprocessingMerge(unittest.TestCase):
         super().__init__(methodName)
 
     def test_if_sorted_single(self):
-
         start = time.time()
         sorted_arr = mergesort(self.array)
         stop = time.time()
@@ -28,7 +27,6 @@ class TestMultiprocessingMerge(unittest.TestCase):
         self.assertTrue(check_if_sorted(sorted_arr))
 
     def test_if_sorted(self):
-        
         start = time.time()
         sorted_arr = mergesortParaller(self.array, 2)
         stop = time.time()
@@ -36,7 +34,6 @@ class TestMultiprocessingMerge(unittest.TestCase):
         self.assertTrue(check_if_sorted(sorted_arr))
 
     def test_if_sorted_4(self):
-        
         start = time.time()
         sorted_arr = mergesortParaller(self.array, 4)
         stop = time.time()
@@ -44,7 +41,6 @@ class TestMultiprocessingMerge(unittest.TestCase):
         self.assertTrue(check_if_sorted(sorted_arr))
 
     def test_if_sorted_8(self):
-        
         start = time.time()
         sorted_arr = mergesortParaller(self.array, 8)
         stop = time.time()
