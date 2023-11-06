@@ -55,9 +55,9 @@ def fibonacci(n):
     else:
         return fibonacci(n - 1) + fibonacci(n - 2)
 
-cacher = Cacher()
-
-a, y = cacher.load_cache(22)
-print(y)
-print(fibonacci(100))
+print(fibonacci(50))
+print(fibonacci(50))
+print(fibonacci(20))
 # cacher.save_to_cache(112, 221)
+
+# dodaj parametr `dump` do fibonacciego

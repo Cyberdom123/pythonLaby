@@ -11,7 +11,7 @@ def fibonacci(n):
 
 
 # With lru_cache
-@lru_cache(maxsize=None)
+@lru_cache(maxsize=2**10)
 def fibonacci_cached(n):
     if n <= 1:
         return n
