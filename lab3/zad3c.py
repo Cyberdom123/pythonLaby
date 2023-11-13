@@ -2,8 +2,8 @@ import pandas as pd
 import csv
 
 class Cacher:
-    def __init__(self):
-        self.filename = "cache.csv"
+    def __init__(self, filename="cache.csv"):
+        self.filename = filename
         try:
             self.df = pd.read_csv(self.filename,sep=',', index_col=0, header=None )
         except:
@@ -30,34 +30,38 @@ class Cacher:
         return result, value
         
     def save_to_cache(self, key, value):
-        with open("cache.csv", 'a') as file:
+        with open(self.filename, 'a') as file:
             file.write(f"{key},{value}\n")
         
         
 
 def cache(function):
-    cacher = Cacher()
-    def wrapper(x):
+    cacher = Cacher(f"{function.__name__}.csv")
+
+    def wrapper(x, **kwargs):
         result, value = cacher.load_cache(x)
+
         if result:
             return value
         else:
-            value = function(x)
-            cacher.save_to_cache(x, value)
+            value = function(x, **kwargs)
+            if dump := kwargs.get("dump"):
+                cacher.save_to_cache(x, value)
             return value
 
     return wrapper
 
 @cache
-def fibonacci(n):
+def fibonacci(n, **kwargs):
     if n <= 1:
         return n
     else:
-        return fibonacci(n - 1) + fibonacci(n - 2)
+        return fibonacci(n - 1, dump=False) + fibonacci(n - 2, dump=False)
 
 cacher = Cacher()
 
 a, y = cacher.load_cache(22)
 print(y)
-print(fibonacci(100))
+# fibonacci = cache(fibonacci)
+print(fibonacci(8, dump=True))
 # cacher.save_to_cache(112, 221)
